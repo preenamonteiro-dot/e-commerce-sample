@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 200px;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            font-size: 18px;
+        }
+
+        .number {
+            font-size: 35px;
+            font-weight: bold;
+            margin: 15px;
+        }
+
+        .orders-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="dashboard">
+
+        <div class="card">
+            <h2>Total Orders</h2>
+            <div class="number">{{ total_orders }}</div>
+        </div>
+
+        <div class="card">
+            <h2>Pending Orders</h2>
+            <div class="number">{{ pending_orders }}</div>
+        </div>
+
+        <div class="card">
+            <h2>Delivered Orders</h2>
+            <div class="number">{{ delivered_orders }}</div>
+        </div>
+
+        <div class="card">
+            <h2>Cancelled Orders</h2>
+            <div class="number">{{ cancelled_orders }}</div>
+        </div>
+
+    </div>
+
+    <div class="orders-link">
+        <a href="/orders">View All Orders</a>
+    </div>
+
+</body>
+</html>

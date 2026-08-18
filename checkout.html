@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+
+    <h1>Checkout</h1>
+
+    {% if products %}
+
+        {% for product in products %}
+            <h2>{{ product.name }}</h2>
+            <p>Price: ₹{{ product.price }}</p>
+            <hr>
+        {% endfor %}
+
+        <h2>Total: ₹{{ total }}</h2>
+
+        <form action="/place_order" method="POST">
+    <button type="submit">Place Order</button>
+</form>
+
+    {% else %}
+
+        <p>Your cart is empty.</p>
+
+    {% endif %}
+
+    <br><br>
+
+    <a href="/cart">Back to Cart</a>
+
+</body>
+</html>

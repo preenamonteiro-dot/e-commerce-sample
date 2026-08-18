@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+
+    <h1>Our Products</h1>
+
+    {% for product in products %}
+
+        <div>
+            <h2>{{ product.name }}</h2>
+
+            <p>{{ product.description }}</p>
+
+            <p>
+                Price: ₹{{ product.price }}
+            </p>
+
+            <form action="{{ url_for('add_to_cart', product_id=product._id) }}" method="POST">
+    <button type="submit">Add to Cart</button>
+</form>
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .order {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .order h2 {
+            margin-top: 0;
+        }
+
+        .product {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .date {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/orders" method="GET">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search product name"
+        value="{{ search }}"
+    >
+
+    <button type="submit">Search</button>
+
+    {% if search %}
+        <a href="/orders">Clear</a>
+    {% endif %}
+</form>
+    <h2>Search Orders</h2>
+
+<form method="GET" action="/orders">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search product..."
+        value="{{ search }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+    <h1>Order History</h1>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+        <div class="order">
+
+            <h2>Order #{{ loop.index }}</h2>
+
+            {% if order.date %}
+                <div class="date">
+                    Date: {{ order.date }}
+                </div>
+            {% endif %}
+
+            {% for product in order.product_details %}
+
+            <div class="product">
+                <strong>{{ product.name }}</strong>
+                <br>
+                Price: ₹{{ product.price }}
+            </div>
+
+            {% endfor %}
+
+            <div class="total">
+                Total: ₹{{ order.total }}
+            </div>
+            <div class="status">
+    Status: {{ order.status or "Pending" }}
+    <form action="/update_order_status/{{ order._id }}" method="POST">
+    <select name="status">
+        <option value="Pending">Pending</option>
+        <option value="Processing">Processing</option>
+        <option value="Shipped">Shipped</option>
+        <option value="Delivered">Delivered</option>
+    </select>
+
+    <button type="submit">Update Status</button>
+</form>
+</div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No orders found.</p>
+
+    {% endif %}
+
+    <a href="/products">Continue Shopping</a>
+
+</body>
+</html>
